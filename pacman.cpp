@@ -1,6 +1,12 @@
-#include "pacman.h"
-#include <gl/gl.h>
 #include <math.h>
+#if defined(__APPLE__)
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
+#include "pacman.h"
 #define PI 3.1415
 
 void pacman::desenhaCirculo(GLfloat x, GLfloat y, GLfloat raio, int blink){
@@ -8,11 +14,10 @@ void pacman::desenhaCirculo(GLfloat x, GLfloat y, GLfloat raio, int blink){
 	int triangleAmount = 20;
 	GLfloat duploPI = 2.0f * PI;
 	
-	
 	glBegin(GL_TRIANGLE_FAN);	
 		
 		glColor3f (1.0f, 1.0f, 0.0f);
-		glVertex2f(x, y);		
+		glVertex2f(x, y);
 		
 		if(blink){
 			for(i=0; i<=triangleAmount; i++){
@@ -29,12 +34,6 @@ void pacman::desenhaCirculo(GLfloat x, GLfloat y, GLfloat raio, int blink){
 						y + (raio * sin(i * duploPI / triangleAmount)));							
 				}		
 			}
-			
-			
 		}
-		
-		
-		
-		
 	glEnd();	
 }

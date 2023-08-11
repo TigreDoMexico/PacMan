@@ -1,12 +1,17 @@
+#if defined(__APPLE__)
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
+#include <windows.h>
+#include <stdlib.h>
+#include <time.h>
 #include "cenario.h"
 #include "pacman.h"
 #include "movimentos.h"
 #include "fantasma.h"
-#include <windows.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
-#include <stdlib.h>
-#include <time.h>
 
 LRESULT CALLBACK WndProc (HWND hWnd, UINT message,
 WPARAM wParam, LPARAM lParam);
@@ -51,19 +56,13 @@ void criaQuadradinho(){
 	}
 	
 	if(fimQuadradinhos == 0){
-        MessageBox(NULL, "ACABOOU!! É TETRA!!", "FIM DE JOGO", MB_OK);
+        MessageBox(NULL, "ACABOOU!! ï¿½ TETRA!!", "FIM DE JOGO", MB_OK);
 		PostQuitMessage(0);       	
 	}
 	
 }
 
-
-
-
-int WINAPI WinMain (HINSTANCE hInstance,
-                    HINSTANCE hPrevInstance,
-                    LPSTR lpCmdLine,
-                    int iCmdShow)
+int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int iCmdShow)
 {
     WNDCLASS wc;
     HWND hWnd;
@@ -72,7 +71,6 @@ int WINAPI WinMain (HINSTANCE hInstance,
     MSG msg;
     BOOL bQuit = FALSE;
     
-
     /* register window class */
     wc.style = CS_OWNDC;
     wc.lpfnWndProc = WndProc;
@@ -264,9 +262,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
             
             glPopMatrix();
             
-
             SwapBuffers (hDC);
-
             
             Sleep (10);
         }
@@ -281,10 +277,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
     return msg.wParam;
 }
 
-
-
-LRESULT CALLBACK WndProc (HWND hWnd, UINT message,
-                          WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {	
     switch (message)
     {
@@ -305,13 +298,12 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message,
             return 0;
             
         case VK_UP:
+
         	if(MovimentoPacMan.verificaLimitesCima(posicaoPacMan[0], posicaoPacMan[1])){
         		posicaoPacMan[1] += 0.05;
         		MovimentoPacMan.registraMovimentosPacMan(posicaoPacMan[0], posicaoPacMan[1]);
         	}
-        	
-        	
-				
+
         	return 0;
 		    
 		case VK_DOWN:
@@ -341,7 +333,6 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message,
         	}
         	
         	return 0;
-		
 		
         }
         return 0;
@@ -381,9 +372,7 @@ void EnableOpenGL (HWND hWnd, HDC *hDC, HGLRC *hRC)
     /* create and enable the render context (RC) */
     *hRC = wglCreateContext( *hDC );
     wglMakeCurrent( *hDC, *hRC );
-
 }
-
 
 /******************
  * Disable OpenGL

@@ -1,5 +1,11 @@
 #include "cenario.h"
-#include <gl/gl.h>
+#if defined(__APPLE__)
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
 
 void cenario::criaLinhaHorizontal(float x0, float x1, float y, int exp){
 	

@@ -1,6 +1,12 @@
 #include "fantasma.h"
 #include "movimentos.h"
-#include <gl/gl.h>
+#if defined(__APPLE__)
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
 
 fantasma::fantasma(float x, float y){
 	this->posX = x;
