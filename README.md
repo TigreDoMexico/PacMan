@@ -8,12 +8,12 @@ Este projeto foi feito enquanto eu estava fazendo a faculdade de Ciência da Com
 
 ## Build DockerFile
 
-´´´
+```
 docker build -t tigredomexico/gcc:1.0 .
-´´´
+```
 
 ## Run DockerFile
 
-´´´
+```
 docker run -i -t -v "%cd%":/source tigredomexico/gcc:1.0 make /source/pacman
-´´´
+```
